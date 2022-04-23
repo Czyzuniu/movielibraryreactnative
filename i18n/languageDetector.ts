@@ -1,5 +1,6 @@
 import * as RNLocalize from 'react-native-localize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import dayjs from 'dayjs';
 
 export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
   return {
@@ -25,6 +26,7 @@ export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
       });
     },
     cacheUserLanguage: function (language: string) {
+      dayjs.locale(language);
       AsyncStorage.setItem('user-language', language);
     },
   };

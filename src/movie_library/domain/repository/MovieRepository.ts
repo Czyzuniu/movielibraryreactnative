@@ -1,5 +1,10 @@
-import Movie from '../entity/Movie';
+import SimplisticMovie from '../entity/SimplisticMovie';
+import DescriptiveMovie from '../entity/DescriptiveMovie';
 
 export interface MovieRepository {
-  getPopularMovies: (page: number) => Promise<Array<Movie>>;
+  getPopularMovies: (
+    page: number,
+    searchQuery: string,
+  ) => Promise<Array<SimplisticMovie>>;
+  getMovieById: (movieId: string) => Promise<DescriptiveMovie>;
 }

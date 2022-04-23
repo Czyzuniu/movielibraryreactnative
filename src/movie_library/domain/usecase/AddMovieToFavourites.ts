@@ -4,7 +4,7 @@ import {InjectableTypes} from '../../../ioc/types';
 import {inject, injectable} from 'inversify';
 
 @injectable()
-export default class GetPopularMoviesUseCase {
+export default class AddMovieToFavourites {
   private repository: MovieRepository;
 
   constructor(
@@ -13,10 +13,7 @@ export default class GetPopularMoviesUseCase {
     this.repository = repository;
   }
 
-  async execute(
-    page: number,
-    searchQuery: string,
-  ): Promise<Array<SimplisticMovie>> {
-    return this.repository.getPopularMovies(page, searchQuery);
+  async execute(movie: SimplisticMovie): Promise<void> {
+    return this.repository.addMovieToFavourites(movie);
   }
 }

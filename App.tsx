@@ -1,7 +1,12 @@
 import React from 'react';
-import {extendTheme, NativeBaseProvider, themeTools} from 'native-base';
+import {
+  extendTheme,
+  NativeBaseProvider,
+  themeTools,
+  useTheme,
+} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import Index from './src/navigation';
+import BottomNavigation from './src/navigation/BottomNavigation';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {Appearance} from 'react-native';
 
@@ -10,52 +15,25 @@ export default function App() {
   const colorScheme = Appearance.getColorScheme();
 
   const theme = extendTheme({
-    colors: {
-      primary: {
-        100: '#262833',
-      },
-    },
-    fontConfig: {
-      Roboto: {
-        100: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        200: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        300: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        400: {
-          normal: 'Roboto-Regular',
-          italic: 'Roboto-Italic',
-        },
-        500: {
-          normal: 'Roboto-Medium',
-        },
-        600: {
-          normal: 'Roboto-Medium',
-          italic: 'Roboto-MediumItalic',
-        },
-      },
-    },
-    fonts: {
-      heading: 'Roboto',
-      body: 'Roboto',
-      mono: 'Roboto',
-    },
     components: {
       Box: {
+        defaultProps: {
+          flex: 1,
+        },
+      },
+      ScrollView: {
         baseStyle: () => {
           return {
             background: themeTools.mode(
               'white.300',
-              'primary.100',
+              'muted.800',
             )({colorMode: colorScheme}),
           };
+        },
+        defaultProps: {
+          contentContainerStyle: {
+            flexGrow: 1,
+          },
         },
       },
     },
@@ -68,7 +46,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <NativeBaseProvider theme={theme}>
         <NavigationContainer>
-          <Index />
+          <BottomNavigation />
         </NavigationContainer>
       </NativeBaseProvider>
     </QueryClientProvider>

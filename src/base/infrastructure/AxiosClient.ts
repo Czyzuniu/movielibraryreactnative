@@ -22,7 +22,7 @@ export default class AxiosClient {
       headers: {
         'Content-Type': 'application/json',
       },
-      baseURL: `${API_URL}/movie`,
+      baseURL: `${API_URL}`,
       transformRequest: (data: any) => data,
     };
 

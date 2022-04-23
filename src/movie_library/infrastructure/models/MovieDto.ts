@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import {jsonMember, jsonObject} from 'typedjson';
+import {jsonArrayMember, jsonMember, jsonObject} from 'typedjson';
+import MovieGenreDto from './MovieGenreDto';
 
 @jsonObject
 export default class MovieDto {
@@ -39,4 +40,6 @@ export default class MovieDto {
   public vote_average: number;
   @jsonMember
   public vote_count: number;
+  @jsonArrayMember(MovieGenreDto)
+  public genres: Array<MovieGenreDto>;
 }
