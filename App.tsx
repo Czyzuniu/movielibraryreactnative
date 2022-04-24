@@ -1,53 +1,35 @@
 import React from 'react';
-import {
-  extendTheme,
-  NativeBaseProvider,
-  themeTools,
-  useTheme,
-} from 'native-base';
+import {NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import BottomNavigation from './src/navigation/BottomNavigation';
+import BottomTabNavigation from './src/navigation/BottomNavigation';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import {Appearance} from 'react-native';
+import AppTheme from './src/base/presentation/theme';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {useTranslation} from 'react-i18next';
+import WaitSpinner from './src/base/presentation/components/WaitSpinner';
 
 export default function App() {
   const queryClient = new QueryClient();
-  const colorScheme = Appearance.getColorScheme();
-
-  const theme = extendTheme({
-    components: {
-      Box: {
-        defaultProps: {
-          flex: 1,
-        },
-      },
-      ScrollView: {
-        baseStyle: () => {
-          return {
-            background: themeTools.mode(
-              'white.300',
-              'muted.800',
-            )({colorMode: colorScheme}),
-          };
-        },
-        defaultProps: {
-          contentContainerStyle: {
-            flexGrow: 1,
-          },
-        },
-      },
-    },
-    config: {
-      initialColorMode: 'dark',
-    },
-  });
+  const {ready} = useTranslation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer>
-          <BottomNavigation />
-        </NavigationContainer>
+      <NativeBaseProvider theme={AppTheme()}>
+        <SafeAreaProvider
+          initialSafeAreaInsets={{
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}>
+          {!ready ? (
+            <WaitSpinner isVisible={true} />
+          ) : (
+            <NavigationContainer>
+              <BottomTabNavigation />
+            </NavigationContainer>
+          )}
+        </SafeAreaProvider>
       </NativeBaseProvider>
     </QueryClientProvider>
   );

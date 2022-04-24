@@ -21,51 +21,24 @@ class MoviesRemoteApiDataSourceImpl implements MoviesRemoteApiDataSource {
   }
 
   async findMovies(query: string, page: number): Promise<MoviesDto> {
-    const deserializer = JSONSerializer.getSerializer(MoviesDto);
-    const response = await this.axiosClient.client.get<MoviesDto>(
-      '/search/movie',
-      {
-        params: {page, query},
-      },
-    );
-    const parsed = deserializer.parse(response);
-
-    if (parsed) {
-      return parsed;
-    }
-
-    throw new JsonParseException('Unable to parse the movies from the API');
+    const response = (await this.axiosClient.client.get('/search/movie', {
+      params: {page, query},
+    })) as MoviesDto;
+    return JSONSerializer.deserialize(MoviesDto, response);
   }
 
   async fetchMostPopularMovies(page: number): Promise<MoviesDto> {
-    const deserializer = JSONSerializer.getSerializer(MoviesDto);
-    const response = await this.axiosClient.client.get<MoviesDto>(
-      '/movie/popular',
-      {
-        params: {page: page},
-      },
-    );
-    const parsed = deserializer.parse(response);
-
-    if (parsed) {
-      return parsed;
-    }
-
-    throw new JsonParseException('Unable to parse the movies from the API');
+    const response = (await this.axiosClient.client.get('/movie/popular', {
+      params: {page: page, include_adult: false},
+    })) as MoviesDto;
+    return JSONSerializer.deserialize(MoviesDto, response);
   }
 
   async fetchMovieById(movieId: string): Promise<MovieDto> {
-    const deserializer = JSONSerializer.getSerializer(MovieDto);
-    const response = await this.axiosClient.client.get<MoviesDto>(
+    const response = (await this.axiosClient.client.get(
       `/movie/${movieId}`,
-    );
-    const parsed = deserializer.parse(response);
-
-    if (parsed) {
-      return parsed;
-    }
-
-    throw new JsonParseException('Unable to parse the movies from the API');
+    )) as MovieDto;
+    return JSONSerializer.deserialize(MovieDto, response);
   }
 }
 

@@ -2,6 +2,7 @@ import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {injectable} from 'inversify';
 import ServerException from '../domain/core/ServerException';
 import Config from 'react-native-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {API_URL, API_KEY} = Config;
 
@@ -23,7 +24,6 @@ export default class AxiosClient {
         'Content-Type': 'application/json',
       },
       baseURL: `${API_URL}`,
-      transformRequest: (data: any) => data,
     };
 
     const instance = axios.create(defaultOptions);
@@ -37,9 +37,8 @@ export default class AxiosClient {
   }
 
   private onRequestFulfilled = async (config: AxiosRequestConfig) => {
-    console.log('Making a request to ' + JSON.stringify(config));
-
-    config.params = {...config.params, api_key: API_KEY};
+    const language = await AsyncStorage.getItem('user-language');
+    config.params = {...config.params, api_key: API_KEY, language};
     return config;
   };
 

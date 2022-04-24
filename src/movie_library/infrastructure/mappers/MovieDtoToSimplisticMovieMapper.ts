@@ -1,6 +1,7 @@
 import {Converter, Mapper} from 'typevert';
 import MovieDto from '../models/MovieDto';
 import SimplisticMovie from '../../domain/entity/SimplisticMovie';
+import CoreMapper from '../../../base/mapper/CoreMapper';
 
 @Mapper(
   {
@@ -11,6 +12,7 @@ import SimplisticMovie from '../../domain/entity/SimplisticMovie';
     {
       source: 'id',
       target: 'id',
+      expr: x => CoreMapper.numberToString(x),
     },
     {
       source: 'title',

@@ -3,9 +3,13 @@ import {initReactI18next} from 'react-i18next';
 import {LANGUAGE_DETECTOR} from './languageDetector';
 
 import en from './locales/en-gb/index';
+import fr from './locales/fr-fr/index';
+import pl from './locales/pl/index';
 
 const LANGUAGES = {
   en,
+  fr,
+  pl,
 };
 
 i18n

@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Screen Tests should render and match snapshot 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    dataSet={Object {}}
+    style={
+      Object {
+        "backgroundColor": "#262626",
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      dataSet={Object {}}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flex": 0.1,
+          "justifyContent": "center",
+          "marginBottom": 6,
+          "marginLeft": 6,
+          "marginRight": 6,
+          "marginTop": 6,
+        }
+      }
+    >
+      <View
+        dataSet={Object {}}
+        isFocused={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#262626",
+            "borderColor": "#262626",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "flex": 1,
+            "flexDirection": "row",
+            "marginLeft": 20,
+            "marginRight": 20,
+            "overflow": "hidden",
+            "width": "75%",
+          }
+        }
+      >
+        <TextInput
+          accessible={true}
+          dataSet={Object {}}
+          editable={true}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          onFocus={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Search"
+          placeholderTextColor="#525252"
+          secureTextEntry={false}
+          selectionColor="#fafaf9"
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#fafafa",
+              "flex": 1,
+              "fontFamily": undefined,
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "height": "100%",
+              "paddingBottom": 8,
+              "paddingLeft": 12,
+              "paddingRight": 12,
+              "paddingTop": 8,
+              "width": "100%",
+            }
+          }
+          value=""
+        />
+      </View>
+    </View>
+    <View
+      dataSet={Object {}}
+      style={
+        Object {
+          "flex": 0.9,
+        }
+      }
+    >
+      <RCTScrollView
+        ListFooterComponent={[Function]}
+        contentContainerStyle={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+        data={Array []}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onEndReached={[Function]}
+        onEndReachedThreshold={0.1}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        refreshControl={
+          <RefreshControlMock
+            onRefresh={[Function]}
+            refreshing={true}
+          />
+        }
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        stickyHeaderIndices={Array []}
+        testID="POPULAR_MOVIES_FLAT_LIST"
+        viewabilityConfigCallbackPairs={Array []}
+      >
+        <RCTRefreshControl />
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <ActivityIndicator
+              accessibilityLabel="loading"
+              accessible={true}
+              color="#fce7f3"
+              size="large"
+              style={
+                Array [
+                  Array [
+                    Object {},
+                    Object {
+                      "dataSet": Object {},
+                    },
+                  ],
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;

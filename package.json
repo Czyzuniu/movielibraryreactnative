@@ -1,5 +1,5 @@
 {
-  "name": "appredux",
+  "name": "movie_library_app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
+    "@react-native-picker/picker": "^2.4.1",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/stack": "^6.2.1",
@@ -19,7 +20,6 @@
     "dayjs": "^1.11.1",
     "i18next": "^21.6.16",
     "inversify": "^6.0.1",
-    "jest-when": "^3.5.1",
     "native-base": "^3.4.3",
     "react": "17.0.2",
     "react-i18next": "^11.16.7",
@@ -45,6 +45,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/react-native": "^9.1.0",
     "@types/jest": "^26.0.24",
+    "@types/jest-when": "^3.5.0",
     "@types/react-native": "^0.67.3",
     "@types/react-native-vector-icons": "^6.4.10",
     "@types/react-test-renderer": "^17.0.1",
@@ -54,8 +55,10 @@
     "babel-plugin-parameter-decorator": "^1.0.16",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "eslint": "^7.32.0",
+    "expect-more-jest": "^5.4.0",
     "jest": "^26.6.3",
     "jest-mock-extended": "^2.0.5",
+    "jest-when": "^3.5.1",
     "metro-react-native-babel-preset": "^0.67.0",
     "react-test-renderer": "17.0.2",
     "ts-jest": "^27.1.4",

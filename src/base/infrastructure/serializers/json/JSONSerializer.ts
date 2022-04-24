@@ -9,4 +9,9 @@ export default class JSONSerializer {
       },
     });
   }
+
+  static deserialize<T, R>(type: Serializable<T>, response: R) {
+    const deserializer = JSONSerializer.getSerializer(type);
+    return deserializer.parse(response) as T;
+  }
 }

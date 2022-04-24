@@ -1,18 +1,16 @@
-import {Box, Image, Pressable} from 'native-base';
+import {Box, Pressable} from 'native-base';
 import React from 'react';
 import SimplisticMovie from '../../../domain/entity/SimplisticMovie';
-import Config from 'react-native-config';
+import MoviePosterImage from '../MoviePosterImage';
 
 type Props = {
   movie: SimplisticMovie;
   onPress: () => void;
 };
 
-const {API_IMAGE_URL} = Config;
-
 function MovieCard({movie, onPress}: Props) {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} testID={'MOVIE_CARD_' + movie.id}>
       {({isPressed}) => {
         return (
           <Box
@@ -25,15 +23,12 @@ function MovieCard({movie, onPress}: Props) {
                 },
               ],
             }}>
-            {movie.poster && (
-              <Image
-                resizeMode={'cover'}
-                width={120}
-                height={200}
-                source={{uri: `${API_IMAGE_URL}/w500/${movie.poster}`}}
-                alt={'image'}
-              />
-            )}
+            <MoviePosterImage
+              imagePath={movie.poster}
+              resizeMode={'cover'}
+              width={120}
+              height={200}
+            />
           </Box>
         );
       }}

@@ -5,39 +5,39 @@ import {myContainer} from '../../../../ioc/container';
 import GetPopularMoviesUseCase from '../../../domain/usecase/GetPopularMoviesUseCase';
 import {InjectableTypes} from '../../../../ioc/types';
 import {useInfiniteQuery} from 'react-query';
-import WaitSpinner from '../../../../base/presentation/components/WaitSpinner';
-import {FlatList, RefreshControl} from 'react-native';
+import {Alert, FlatList, RefreshControl} from 'react-native';
 import MovieCard from '../../components/MovieCard';
 import {MovieLibraryQueryKey} from '../../../consts/consts';
 import {StackScreenProps} from '@react-navigation/stack';
 import {HomeStackParamList} from '../../../../navigation/types';
 import SimplisticMovie from '../../../domain/entity/SimplisticMovie';
 import SearchBar from '../../../../base/presentation/components/SearchBar';
-import AddMovieToFavourites from '../../../domain/usecase/AddMovieToFavourites';
+import LanguageModal from '../../../../base/presentation/components/LanguageModal';
 
 type Props = StackScreenProps<HomeStackParamList, 'Home'>;
-const getPopularMovieUseCase = myContainer.get<GetPopularMoviesUseCase>(
-  InjectableTypes.GetPopularMoviesUseCase,
-);
-const findMovieByTextUseCase = myContainer.get<AddMovieToFavourites>(
-  InjectableTypes.FindMovieByTextUseCase,
-);
 
 export default function Home({navigation}: Props) {
+  const getPopularMovieUseCase = myContainer.get<GetPopularMoviesUseCase>(
+    InjectableTypes.GetPopularMoviesUseCase,
+  );
+
   const [search, setSearch] = useState('');
 
   const getPopularMovies = async ({pageParam = 1}) => {
     return getPopularMovieUseCase.execute(pageParam, search);
   };
 
-  const {data, isLoading, refetch, fetchNextPage, isFetching} =
-    useInfiniteQuery(MovieLibraryQueryKey.GetPopularMovies, getPopularMovies, {
-      onError: e => alert(e),
+  const {data, refetch, fetchNextPage, isFetching} = useInfiniteQuery(
+    MovieLibraryQueryKey.GetPopularMovies,
+    getPopularMovies,
+    {
+      onError: (e: any) => Alert.alert(e.message),
       retry: 0,
       getNextPageParam: (_, pages) => {
         return pages.length + 1;
       },
-    });
+    },
+  );
 
   const navigateToViewMovie = useCallback(
     (movie: SimplisticMovie) => {
@@ -63,6 +63,7 @@ export default function Home({navigation}: Props) {
       </Center>
       <Box flex={0.9}>
         <FlatList
+          testID={'POPULAR_MOVIES_FLAT_LIST'}
           refreshControl={
             <RefreshControl refreshing={isFetching} onRefresh={refetch} />
           }
@@ -80,6 +81,7 @@ export default function Home({navigation}: Props) {
           }
         />
       </Box>
+      <LanguageModal />
     </Box>
   );
 }

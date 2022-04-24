@@ -6,7 +6,7 @@ export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
   return {
     type: 'languageDetector',
     async: true,
-    init: function (services, detectorOptions, i18nextOptions) {
+    init: function () {
       /* use services and options */
     },
     detect: function (callback: (languageToSet: string) => void) {
@@ -26,6 +26,7 @@ export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
       });
     },
     cacheUserLanguage: function (language: string) {
+      console.log(language);
       dayjs.locale(language);
       AsyncStorage.setItem('user-language', language);
     },

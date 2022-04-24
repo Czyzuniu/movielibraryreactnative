@@ -7,8 +7,8 @@ export default class DescriptiveMovie {
   releaseDate: Date;
   status: string;
   overview: string;
-  poster: string;
-  backdrop: string;
+  poster?: string;
+  backdrop?: string;
   averageVote: number;
   totalVotes: number;
   runTime: number;

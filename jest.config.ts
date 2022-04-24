@@ -16,9 +16,6 @@ export default {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
-  // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
-
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: ['**/*.{jsx,ts,tsx}'],
 
@@ -26,9 +23,15 @@ export default {
   coverageDirectory: './test/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "\\\\node_modules\\\\"
-  // ],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'types.ts',
+    'jestSetup.ts',
+    'test/utils',
+    'locales',
+    'jest.config.ts',
+    'navigation',
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -169,11 +172,9 @@ export default {
   // A map from regular expressions to paths to transformers
   // transform: undefined,
 
-  // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // transformIgnorePatterns: [
-  //   "\\\\node_modules\\\\",
-  //   "\\.pnp\\.[^\\\\]+$"
-  // ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)',
+  ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

@@ -10,7 +10,6 @@ import {MovieRepository} from '../movie_library/domain/repository/MovieRepositor
 import MovieRepositoryImpl from '../movie_library/infrastructure/repository/MovieRepositoryImpl';
 import GetPopularMoviesUseCase from '../movie_library/domain/usecase/GetPopularMoviesUseCase';
 import GetMovieByIdUseCase from '../movie_library/domain/usecase/GetMovieByIdUseCase';
-import AddMovieToFavourites from '../movie_library/domain/usecase/AddMovieToFavourites';
 
 const myContainer = new Container();
 
@@ -20,9 +19,6 @@ const useCases = new ContainerModule(bind => {
   );
   bind<GetMovieByIdUseCase>(InjectableTypes.GetMovieByIdUseCase).to(
     GetMovieByIdUseCase,
-  );
-  bind<AddMovieToFavourites>(InjectableTypes.FindMovieByTextUseCase).to(
-    AddMovieToFavourites,
   );
 });
 

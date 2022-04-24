@@ -13,9 +13,10 @@ import MovieGenreDtoToMovieGenreMapper from './MovieGenreDtoToMovieGenreMapper';
     {
       source: 'id',
       target: 'id',
+      expr: x => CoreMapper.numberToString(x),
     },
     {
-      source: 'id',
+      source: 'homepage',
       target: 'homepageUrl',
     },
     {

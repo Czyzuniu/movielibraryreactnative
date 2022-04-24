@@ -1,21 +1,18 @@
-import {Image} from 'native-base';
 import React from 'react';
-import Config from 'react-native-config';
+import MovieImage from '../MovieImage';
 
 type Props = {
-  imagePath: string;
+  imagePath?: string;
 };
-
-const {API_IMAGE_URL} = Config;
 
 export default function MovieBackdropImage({imagePath}: Props) {
   return (
-    <Image
+    <MovieImage
       resizeMode={'cover'}
       width={'full'}
       height={'3xs'}
-      source={{uri: `${API_IMAGE_URL}/w500/${imagePath}`}}
-      alt={'image'}
+      path={imagePath}
+      alt={'movie-backdrop-image'}
     />
   );
 }

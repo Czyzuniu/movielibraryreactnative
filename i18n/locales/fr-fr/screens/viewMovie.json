@@ -1,0 +1,9 @@
+{
+  "ReleaseDate": "Date de sortie",
+  "Runtime": "Durée",
+  "RuntimeMin": "{{minutes}} min",
+  "TotalVotes": "{{total}} voix",
+  "AddToFavourites": "Ajouter aux favoris",
+  "MovieAddedToFavourites": "{{title}} ajouté à vos favoris",
+  "Overview": "Aperçu"
+}

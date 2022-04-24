@@ -9,7 +9,7 @@ import {RootBottomNavigationParamList} from '../types';
 import HomeStackNavigation from '../HomeStackNavigation';
 import {useTheme} from 'native-base';
 
-export default function BottomNavigation() {
+export default function BottomTabNavigation() {
   const {t} = useTranslation('navigation');
   const {colors} = useTheme();
   const navigationStyle = styles();
@@ -31,21 +31,9 @@ export default function BottomNavigation() {
             <NavigationTabIcon name={'film'} color={color} />
           ),
           tabBarLabel: t('homeTabLabelTitle'),
-          headerTitle: t('homeTabHeaderTitle'),
         }}
         name="HomeRootStack"
         component={HomeStackNavigation}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({color}) => (
-            <NavigationTabIcon color={color} name={'heart'} />
-          ),
-          tabBarLabel: t('favouriteTabLabelTitle'),
-          headerTitle: t('favouriteTabHeaderTitle'),
-        }}
-        name="FavouritesRootStack"
-        component={Favourites}
       />
     </Tab.Navigator>
   );
