@@ -1,7 +1,7 @@
 import JSONSerializer from '../../../../../../src/base/infrastructure/serializers/json/JSONSerializer';
 import MovieDto from '../../../../../../src/movie_library/infrastructure/models/MovieDto';
 import {TypedJSON} from 'typedjson';
-import JsonParseException from '../../../../../../src/base/domain/core/JsonParseException';
+import JsonParseException from '../../../../../../src/base/domain/core/exception/JsonParseException';
 
 describe('JSONSerializer', () => {
   it('should get serializer for a right ty', () => {

@@ -1,8 +1,11 @@
-import {Box, Button, Center, Flex, Heading, Text, useToast} from 'native-base';
+import {Box, Button, Center, Flex, Heading, Text} from 'native-base';
 import MoviePosterImage from '../MoviePosterImage';
 import React from 'react';
 import DescriptiveMovie from '../../../domain/entity/DescriptiveMovie';
 import {useTranslation} from 'react-i18next';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {HomeStackParamList} from '../../../../navigation/types';
 
 type Props = {
   movie: DescriptiveMovie;
@@ -10,16 +13,17 @@ type Props = {
 
 export default function MovieDetailsHeader({movie}: Props) {
   const {t} = useTranslation('viewMovie');
-  const toast = useToast();
+  const navigation =
+    useNavigation<StackNavigationProp<HomeStackParamList, 'ViewMovie'>>();
 
-  const {poster, title, genres} = movie;
+  const {poster, title, genres, homepageUrl} = movie;
 
   return (
-    <Flex direction={'row'}>
-      <Center m={1} shadow={'1'} borderRadius={3}>
+    <Flex direction={'row'} m={2}>
+      <Center>
         <MoviePosterImage imagePath={poster} />
       </Center>
-      <Box margin={1} shadow={'1'} borderRadius={3}>
+      <Box shadow={1}>
         <Center>
           <Heading textAlign={'center'} size={'md'}>
             {title}
@@ -35,9 +39,11 @@ export default function MovieDetailsHeader({movie}: Props) {
           variant={'outline'}
           colorScheme="success"
           onPress={() =>
-            toast.show({description: t('MovieAddedToFavourites', {title})})
+            navigation.navigate('ViewMovieHomePageWebView', {
+              movieUrl: homepageUrl,
+            })
           }>
-          {t('AddToFavourites')}
+          {t('MovieGoWebsite')}
         </Button>
       </Box>
     </Flex>

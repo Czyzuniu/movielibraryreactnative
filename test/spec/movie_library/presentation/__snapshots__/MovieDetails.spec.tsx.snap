@@ -19,6 +19,7 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
         "flex": 1,
       }
     }
+    testID="MOVIE_DETAILS_12345"
   >
     <View
       dataSet={Object {}}
@@ -27,6 +28,10 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
           "display": "flex",
           "flex": 1,
           "flexDirection": "row",
+          "marginBottom": 8,
+          "marginLeft": 8,
+          "marginRight": 8,
+          "marginTop": 8,
         }
       }
     >
@@ -35,22 +40,9 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
         style={
           Object {
             "alignItems": "center",
-            "borderRadius": 3,
             "display": "flex",
-            "elevation": 2,
             "flex": 1,
             "justifyContent": "center",
-            "marginBottom": 4,
-            "marginLeft": 4,
-            "marginRight": 4,
-            "marginTop": 4,
-            "shadowColor": "#000000",
-            "shadowOffset": Object {
-              "height": 1,
-              "width": 0,
-            },
-            "shadowOpacity": 0.2,
-            "shadowRadius": 1.41,
           }
         }
       >
@@ -81,13 +73,8 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
         dataSet={Object {}}
         style={
           Object {
-            "borderRadius": 3,
             "elevation": 2,
             "flex": 1,
-            "marginBottom": 4,
-            "marginLeft": 4,
-            "marginRight": 4,
-            "marginTop": 4,
             "shadowColor": "#000000",
             "shadowOffset": Object {
               "height": 1,
@@ -229,7 +216,7 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
                   }
                 }
               >
-                AddToFavourites
+                MovieGoWebsite
               </Text>
             </View>
           </View>
@@ -339,7 +326,9 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
                 "textDecorationLine": undefined,
               }
             }
-          />
+          >
+            TotalVotes
+          </Text>
         </View>
         <View
           dataSet={Object {}}
@@ -381,7 +370,9 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
                   "textDecorationLine": undefined,
                 }
               }
-            />
+            >
+              RuntimeMin
+            </Text>
             <Text
               allowFontScaling={false}
               selectable={false}
@@ -503,7 +494,9 @@ exports[`MovieDetails Tests should render and match snapshot 1`] = `
                 "textDecorationLine": undefined,
               }
             }
-          />
+          >
+            ReleaseDate
+          </Text>
         </View>
       </View>
     </View>

@@ -1,10 +1,11 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../../movie_library/presentation/screens/Home';
+import PopularMovies from '../../movie_library/presentation/screens/PopularMovies';
 import ViewMovie from '../../movie_library/presentation/screens/ViewMovie';
 import {HomeStackParamList} from '../types';
 import React from 'react';
 import styles from '../BottomNavigation/styles';
 import {useTranslation} from 'react-i18next';
+import ViewMovieHomePageUrl from '../../movie_library/presentation/screens/ViewMovieHomePageUrl';
 
 export default function HomeStackNavigation() {
   const {t} = useTranslation('navigation');
@@ -19,7 +20,7 @@ export default function HomeStackNavigation() {
       }}>
       <Stack.Screen
         name="Home"
-        component={Home}
+        component={PopularMovies}
         options={{
           headerTitle: t('homeTabHeaderTitle'),
         }}
@@ -28,6 +29,13 @@ export default function HomeStackNavigation() {
         name="ViewMovie"
         component={ViewMovie}
         options={({route}) => ({title: route.params.title})}
+      />
+      <Stack.Screen
+        name="ViewMovieHomePageWebView"
+        options={{
+          headerTitle: '',
+        }}
+        component={ViewMovieHomePageUrl}
       />
     </Stack.Navigator>
   );

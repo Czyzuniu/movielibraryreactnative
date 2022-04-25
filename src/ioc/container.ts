@@ -10,6 +10,8 @@ import {MovieRepository} from '../movie_library/domain/repository/MovieRepositor
 import MovieRepositoryImpl from '../movie_library/infrastructure/repository/MovieRepositoryImpl';
 import GetPopularMoviesUseCase from '../movie_library/domain/usecase/GetPopularMoviesUseCase';
 import GetMovieByIdUseCase from '../movie_library/domain/usecase/GetMovieByIdUseCase';
+import {AsyncStorageRepository} from '../async_storage/domain/repository/AsyncStorageRepository';
+import AsyncStorageRepositoryImpl from '../async_storage/infrastructure/AsyncStorageRepositoryImpl';
 
 const myContainer = new Container();
 
@@ -25,6 +27,10 @@ const useCases = new ContainerModule(bind => {
 const repositories = new ContainerModule(bind => {
   bind<MovieRepository>(InjectableTypes.MovieRepository)
     .to(MovieRepositoryImpl)
+    .inSingletonScope();
+
+  bind<AsyncStorageRepository>(InjectableTypes.AsyncStorageRepository)
+    .to(AsyncStorageRepositoryImpl)
     .inSingletonScope();
 });
 

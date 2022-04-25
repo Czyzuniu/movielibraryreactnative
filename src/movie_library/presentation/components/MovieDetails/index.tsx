@@ -14,7 +14,7 @@ export default function MovieDetails({movie}: Props) {
   const {backdrop} = movie;
 
   return (
-    <Box>
+    <Box testID={`MOVIE_DETAILS_${movie.id}`}>
       <MovieDetailsHeader movie={movie} />
       <MovieBadgesRow movie={movie} />
       <MovieOverview movie={movie} />

@@ -1,34 +1,42 @@
 import * as RNLocalize from 'react-native-localize';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import dayjs from 'dayjs';
+import {myContainer} from '../src/ioc/container';
+import {AsyncStorageRepository} from '../src/async_storage/domain/repository/AsyncStorageRepository';
+import {InjectableTypes} from '../src/ioc/types';
+import {LocalStorageLocaleKey} from './consts';
 
 export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
+  const asyncStorageRepository = myContainer.get<AsyncStorageRepository>(
+    InjectableTypes.AsyncStorageRepository,
+  );
+
   return {
     type: 'languageDetector',
     async: true,
-    init: function () {
-      /* use services and options */
-    },
+    init: function () {},
     detect: function (callback: (languageToSet: string) => void) {
-      AsyncStorage.getItem('user-language').then(language => {
-        if (language) {
-          callback(language);
-          return;
-        }
-
-        const findBestAvailableLanguage = RNLocalize.findBestAvailableLanguage(
-          langCodes,
-        ) || {
-          languageTag: 'en',
-        };
-        callback(findBestAvailableLanguage.languageTag);
-        return;
-      });
+      asyncStorageRepository
+        .retrieve(LocalStorageLocaleKey)
+        .then((language: {language: string}) => {
+          if (language) {
+            callback(language.language);
+            return;
+          }
+          return 'en';
+        })
+        .catch(() => {
+          const findBestAvailableLanguage =
+            RNLocalize.findBestAvailableLanguage(langCodes) || {
+              languageTag: 'en',
+            };
+          callback(findBestAvailableLanguage.languageTag);
+        });
     },
     cacheUserLanguage: function (language: string) {
-      console.log(language);
       dayjs.locale(language);
-      AsyncStorage.setItem('user-language', language);
+      asyncStorageRepository.persist(LocalStorageLocaleKey, {
+        language,
+      });
     },
   };
 };

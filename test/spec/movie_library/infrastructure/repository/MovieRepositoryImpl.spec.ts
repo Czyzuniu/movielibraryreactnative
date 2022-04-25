@@ -2,7 +2,6 @@ import MovieRepositoryImpl from '../../../../../src/movie_library/infrastructure
 import {MoviesRemoteApiDataSource} from '../../../../../src/movie_library/infrastructure/datasource/MoviesRemoteApiDataSource';
 import {mock} from 'jest-mock-extended';
 import {when} from 'jest-when';
-import {MoviesDto} from '../../../../../src/movie_library/infrastructure/models/MoviesDto';
 import 'expect-more-jest';
 import TestObjects from '../../../../utils/TestObjects';
 

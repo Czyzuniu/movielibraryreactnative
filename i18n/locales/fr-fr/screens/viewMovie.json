@@ -4,6 +4,6 @@
   "RuntimeMin": "{{minutes}} min",
   "TotalVotes": "{{total}} voix",
   "AddToFavourites": "Ajouter aux favoris",
-  "MovieAddedToFavourites": "{{title}} ajouté à vos favoris",
+  "MovieGoWebsite": "Voir le site Web",
   "Overview": "Aperçu"
 }

@@ -5,6 +5,7 @@ const InjectableTypes = {
   MovieRepository: Symbol.for('MovieRepository'),
   MovieRemoteDataSource: Symbol.for('MovieRemoteDataSource'),
   AxiosClient: Symbol.for('AxiosClient'),
+  AsyncStorageRepository: Symbol.for('AsyncStorageRepository'),
 };
 
 export {InjectableTypes};

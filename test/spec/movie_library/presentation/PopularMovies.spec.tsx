@@ -1,7 +1,7 @@
 import {fireEvent, render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import ContextWrapper from '../../../utils/ContextWrapper';
-import Home from '../../../../src/movie_library/presentation/screens/Home';
+import PopularMovies from '../../../../src/movie_library/presentation/screens/PopularMovies';
 import {mockNavigation} from '../../../utils/mockNavigation';
 import GetPopularMoviesUseCase from '../../../../src/movie_library/domain/usecase/GetPopularMoviesUseCase';
 import {mockDeep} from 'jest-mock-extended';
@@ -12,7 +12,7 @@ import TestObjects from '../../../utils/TestObjects';
 import {Alert} from 'react-native';
 import {act} from 'react-test-renderer';
 
-describe('Home Screen Tests', () => {
+describe('PopularMovies Screen Tests', () => {
   let popularMoviesUseCaseMock: GetPopularMoviesUseCase;
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Home Screen Tests', () => {
   it('should render and match snapshot', () => {
     const {toJSON} = render(
       <ContextWrapper>
-        <Home {...mockNavigation()} />
+        <PopularMovies {...mockNavigation()} />
       </ContextWrapper>,
     );
     expect(toJSON()).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe('Home Screen Tests', () => {
 
     const {getByTestId} = render(
       <ContextWrapper>
-        <Home {...mockNavigation()} />
+        <PopularMovies {...mockNavigation()} />
       </ContextWrapper>,
     );
 
@@ -61,7 +61,7 @@ describe('Home Screen Tests', () => {
 
     const {getByTestId} = render(
       <ContextWrapper>
-        <Home {...navigation} />
+        <PopularMovies {...navigation} />
       </ContextWrapper>,
     );
 
@@ -88,7 +88,7 @@ describe('Home Screen Tests', () => {
 
     render(
       <ContextWrapper>
-        <Home {...navigation} />
+        <PopularMovies {...navigation} />
       </ContextWrapper>,
     );
 
@@ -103,7 +103,7 @@ describe('Home Screen Tests', () => {
 
     const {getByTestId} = render(
       <ContextWrapper>
-        <Home {...navigation} />
+        <PopularMovies {...navigation} />
       </ContextWrapper>,
     );
 
@@ -111,7 +111,7 @@ describe('Home Screen Tests', () => {
 
     await waitFor(() => expect(flatlist.props.data).toStrictEqual(movies));
 
-    act(() => {
+    await act(async () => {
       flatlist.props.onEndReached();
     });
 

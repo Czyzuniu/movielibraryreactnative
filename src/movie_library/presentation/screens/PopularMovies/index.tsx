@@ -16,7 +16,7 @@ import LanguageModal from '../../../../base/presentation/components/LanguageModa
 
 type Props = StackScreenProps<HomeStackParamList, 'Home'>;
 
-export default function Home({navigation}: Props) {
+export default function PopularMovies({navigation}: Props) {
   const getPopularMovieUseCase = myContainer.get<GetPopularMoviesUseCase>(
     InjectableTypes.GetPopularMoviesUseCase,
   );
@@ -77,7 +77,9 @@ export default function Home({navigation}: Props) {
           )}
           keyExtractor={item => item.id}
           ListFooterComponent={() =>
-            isFetching ? <Spinner size={'lg'} color={'secondary.100'} /> : null
+            isFetching && data ? (
+              <Spinner size={'lg'} color={'secondary.100'} />
+            ) : null
           }
         />
       </Box>

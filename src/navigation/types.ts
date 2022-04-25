@@ -1,5 +1,3 @@
-import SimplisticMovie from '../movie_library/domain/entity/SimplisticMovie';
-
 type RootBottomNavigationParamList = {
   HomeRootStack: undefined;
   FavouritesRootStack: undefined;
@@ -8,6 +6,7 @@ type RootBottomNavigationParamList = {
 type HomeStackParamList = {
   Home: undefined;
   ViewMovie: {movieId: string; title: string};
+  ViewMovieHomePageWebView: {movieUrl: string};
 };
 
 export {RootBottomNavigationParamList, HomeStackParamList};

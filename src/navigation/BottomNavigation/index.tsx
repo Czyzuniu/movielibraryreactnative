@@ -1,13 +1,12 @@
 import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Favourites from '../../movie_library/presentation/screens/Favourites';
 import {useTranslation} from 'react-i18next';
 import styles from './styles';
-import NavigationTabIcon from '../../base/presentation/components/NavigationTabIcon';
 import {RootBottomNavigationParamList} from '../types';
 import HomeStackNavigation from '../HomeStackNavigation';
 import {useTheme} from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function BottomTabNavigation() {
   const {t} = useTranslation('navigation');
@@ -28,7 +27,7 @@ export default function BottomTabNavigation() {
       <Tab.Screen
         options={{
           tabBarIcon: ({color}) => (
-            <NavigationTabIcon name={'film'} color={color} />
+            <Icon name={'film'} color={color} size={15} />
           ),
           tabBarLabel: t('homeTabLabelTitle'),
         }}

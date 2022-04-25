@@ -115,7 +115,9 @@ exports[`MovieBadgesRow Tests should render and match snapshot 1`] = `
               "textDecorationLine": undefined,
             }
           }
-        />
+        >
+          TotalVotes
+        </Text>
       </View>
       <View
         dataSet={Object {}}
@@ -157,7 +159,9 @@ exports[`MovieBadgesRow Tests should render and match snapshot 1`] = `
                 "textDecorationLine": undefined,
               }
             }
-          />
+          >
+            RuntimeMin
+          </Text>
           <Text
             allowFontScaling={false}
             selectable={false}
@@ -279,7 +283,9 @@ exports[`MovieBadgesRow Tests should render and match snapshot 1`] = `
               "textDecorationLine": undefined,
             }
           }
-        />
+        >
+          ReleaseDate
+        </Text>
       </View>
     </View>
   </View>

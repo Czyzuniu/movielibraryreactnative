@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`View Movie Screen Tests should render and match snapshot 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      Object {
+        "flexGrow": 1,
+      }
+    }
+    dataSet={Object {}}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={true}
+      />
+    }
+    style={
+      Object {
+        "backgroundColor": "white.300",
+      }
+    }
+    testID="VIEW_MOVIE_SCROLL"
+  >
+    <RCTRefreshControl />
+    <View />
+  </RCTScrollView>
+</RNCSafeAreaProvider>
+`;

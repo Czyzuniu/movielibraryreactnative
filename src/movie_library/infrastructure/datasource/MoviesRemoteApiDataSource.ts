@@ -1,7 +1,6 @@
 import AxiosClient from '../../../base/infrastructure/AxiosClient';
 import JSONSerializer from '../../../base/infrastructure/serializers/json/JSONSerializer';
 import {MoviesDto} from '../models/MoviesDto';
-import JsonParseException from '../../../base/domain/core/JsonParseException';
 import {inject, injectable} from 'inversify';
 import {InjectableTypes} from '../../../ioc/types';
 import MovieDto from '../models/MovieDto';
