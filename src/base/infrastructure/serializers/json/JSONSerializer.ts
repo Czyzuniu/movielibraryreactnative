@@ -1,5 +1,5 @@
 import {Serializable, TypedJSON} from 'typedjson';
-import JsonParseException from '../../../domain/core/JsonParseException';
+import JsonParseException from '../../../domain/core/exception/JsonParseException';
 
 export default class JSONSerializer {
   static getSerializer<T>(type: Serializable<T>) {
@@ -8,5 +8,10 @@ export default class JSONSerializer {
         throw new JsonParseException(e.message);
       },
     });
+  }
+
+  static deserialize<T, R>(type: Serializable<T>, response: R) {
+    const deserializer = JSONSerializer.getSerializer(type);
+    return deserializer.parse(response) as T;
   }
 }

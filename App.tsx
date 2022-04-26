@@ -1,75 +1,35 @@
 import React from 'react';
-import {extendTheme, NativeBaseProvider, themeTools} from 'native-base';
+import {NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import Index from './src/navigation';
+import BottomTabNavigation from './src/navigation/BottomNavigation';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import {Appearance} from 'react-native';
+import AppTheme from './src/base/presentation/theme';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {useTranslation} from 'react-i18next';
+import WaitSpinner from './src/base/presentation/components/WaitSpinner';
 
 export default function App() {
   const queryClient = new QueryClient();
-  const colorScheme = Appearance.getColorScheme();
-
-  const theme = extendTheme({
-    colors: {
-      primary: {
-        100: '#262833',
-      },
-    },
-    fontConfig: {
-      Roboto: {
-        100: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        200: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        300: {
-          normal: 'Roboto-Light',
-          italic: 'Roboto-LightItalic',
-        },
-        400: {
-          normal: 'Roboto-Regular',
-          italic: 'Roboto-Italic',
-        },
-        500: {
-          normal: 'Roboto-Medium',
-        },
-        600: {
-          normal: 'Roboto-Medium',
-          italic: 'Roboto-MediumItalic',
-        },
-      },
-    },
-    fonts: {
-      heading: 'Roboto',
-      body: 'Roboto',
-      mono: 'Roboto',
-    },
-    components: {
-      Box: {
-        baseStyle: () => {
-          return {
-            background: themeTools.mode(
-              'white.300',
-              'primary.100',
-            )({colorMode: colorScheme}),
-          };
-        },
-      },
-    },
-    config: {
-      initialColorMode: 'dark',
-    },
-  });
+  const {ready} = useTranslation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer>
-          <Index />
-        </NavigationContainer>
+      <NativeBaseProvider theme={AppTheme()}>
+        <SafeAreaProvider
+          initialSafeAreaInsets={{
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}>
+          {!ready ? (
+            <WaitSpinner isVisible={true} />
+          ) : (
+            <NavigationContainer>
+              <BottomTabNavigation />
+            </NavigationContainer>
+          )}
+        </SafeAreaProvider>
       </NativeBaseProvider>
     </QueryClientProvider>
   );

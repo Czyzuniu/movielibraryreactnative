@@ -1,5 +1,5 @@
 import {MovieRepository} from '../repository/MovieRepository';
-import Movie from '../entity/Movie';
+import SimplisticMovie from '../entity/SimplisticMovie';
 import {InjectableTypes} from '../../../ioc/types';
 import {inject, injectable} from 'inversify';
 
@@ -13,7 +13,10 @@ export default class GetPopularMoviesUseCase {
     this.repository = repository;
   }
 
-  async execute(page: number): Promise<Array<Movie>> {
-    return this.repository.getPopularMovies(page);
+  async execute(
+    page: number,
+    searchQuery: string,
+  ): Promise<Array<SimplisticMovie>> {
+    return this.repository.getPopularMovies(page, searchQuery);
   }
 }

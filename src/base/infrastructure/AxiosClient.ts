@@ -1,20 +1,28 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {injectable} from 'inversify';
-import ServerException from '../domain/core/ServerException';
+import {inject, injectable} from 'inversify';
+import ServerException from '../domain/core/exception/ServerException';
 import Config from 'react-native-config';
+import {LocalStorageLocaleKey} from '../../../i18n/consts';
+import {InjectableTypes} from '../../ioc/types';
+import AsyncStorageRepository from '../../async_storage/domain/repository/AsyncStorageRepository';
 
 const {API_URL, API_KEY} = Config;
 
 @injectable()
 export default class AxiosClient {
   private _client: AxiosInstance;
+  private _asyncStorageRepository: AsyncStorageRepository;
 
   get client(): AxiosInstance {
     return this._client;
   }
 
-  constructor() {
+  constructor(
+    @inject(InjectableTypes.AsyncStorageRepository)
+    asyncStorageRepository: AsyncStorageRepository,
+  ) {
     this._client = this.setupConfigurationAndReturnInstance();
+    this._asyncStorageRepository = asyncStorageRepository;
   }
 
   private setupConfigurationAndReturnInstance() {
@@ -22,8 +30,7 @@ export default class AxiosClient {
       headers: {
         'Content-Type': 'application/json',
       },
-      baseURL: `${API_URL}/movie`,
-      transformRequest: (data: any) => data,
+      baseURL: `${API_URL}`,
     };
 
     const instance = axios.create(defaultOptions);
@@ -37,9 +44,14 @@ export default class AxiosClient {
   }
 
   private onRequestFulfilled = async (config: AxiosRequestConfig) => {
-    console.log('Making a request to ' + JSON.stringify(config));
-
-    config.params = {...config.params, api_key: API_KEY};
+    const userLang = (await this._asyncStorageRepository.retrieve(
+      LocalStorageLocaleKey,
+    )) as {language: string};
+    config.params = {
+      ...config.params,
+      api_key: API_KEY,
+      language: userLang.language,
+    };
     return config;
   };
 

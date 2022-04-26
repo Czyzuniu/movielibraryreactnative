@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard Tests should render and match snapshot 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    dataSet={Object {}}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={Object {}}
+    testID="MOVIE_CARD_12345"
+  >
+    <View
+      dataSet={Object {}}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "marginBottom": 6,
+            "marginLeft": 6,
+            "marginRight": 6,
+            "marginTop": 6,
+            "opacity": 1,
+          },
+          Object {
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <Image
+        accessibilityLabel="movie-poster"
+        alt="movie-poster"
+        dataSet={Object {}}
+        onError={[Function]}
+        path="poster.jpg"
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "https://mock-image-api.co.uk/w500/poster.jpg",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 3,
+            "height": 200,
+            "maxWidth": "100%",
+            "width": 120,
+          }
+        }
+        testID="TEST_IMAGE_poster.jpg"
+      />
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;

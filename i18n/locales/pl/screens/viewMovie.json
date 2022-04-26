@@ -1,0 +1,9 @@
+{
+  "ReleaseDate": "Data wydania",
+  "Runtime": "Czas",
+  "RuntimeMin": "{{minutes}} minut",
+  "TotalVotes": "{{total}} glosów",
+  "AddToFavourites": "Dodaj do ulubionych",
+  "MovieGoWebsite": "Strona internetowa",
+  "Overview": "Przegląd"
+}
