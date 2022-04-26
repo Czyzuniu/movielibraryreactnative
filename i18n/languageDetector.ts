@@ -1,9 +1,9 @@
 import * as RNLocalize from 'react-native-localize';
 import dayjs from 'dayjs';
 import {myContainer} from '../src/ioc/container';
-import {AsyncStorageRepository} from '../src/async_storage/domain/repository/AsyncStorageRepository';
 import {InjectableTypes} from '../src/ioc/types';
 import {LocalStorageLocaleKey} from './consts';
+import AsyncStorageRepository from '../src/async_storage/domain/repository/AsyncStorageRepository';
 
 export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
   const asyncStorageRepository = myContainer.get<AsyncStorageRepository>(
