@@ -98,11 +98,6 @@ exports[`PopularMovies Screen Tests should render and match snapshot 1`] = `
     >
       <RCTScrollView
         ListFooterComponent={[Function]}
-        contentContainerStyle={
-          Object {
-            "alignSelf": "center",
-          }
-        }
         data={Array []}
         getItem={[Function]}
         getItemCount={[Function]}
@@ -309,7 +304,6 @@ exports[`PopularMovies Screen Tests should render and match snapshot 1`] = `
             <View
               style={
                 Object {
-                  "height": 50,
                   "width": "100%",
                 }
               }

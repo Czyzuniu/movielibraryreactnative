@@ -3,6 +3,7 @@ import {Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Keyboard} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import { styles } from './styles';
 
 type Props = {
   onSearch: (text: string) => void;
@@ -30,7 +31,7 @@ export default function SearchBar({onSearch}: Props) {
       InputRightElement={
         isFocused ? (
           <Icon
-            style={{margin: 2}}
+            style={styles.clearIcon}
             size={25}
             name={'times-circle'}
             onPress={() => {

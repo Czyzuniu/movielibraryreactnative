@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import i18n from '../../../../../i18n/i18n';
+import { styles } from './styles';
 export default function LanguageModal() {
   const [language, setLanguage] = useState('en-GB');
   const {t} = useTranslation(['language', 'common']);
@@ -14,7 +15,7 @@ export default function LanguageModal() {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Icon name={'globe'} size={25} style={{margin: 15}} onPress={onOpen} />
+        <Icon name={'globe'} size={25} style={styles.headerIcon} onPress={onOpen} />
       ),
     });
   }, [navigation, onOpen]);
@@ -49,7 +50,7 @@ export default function LanguageModal() {
       <Modal.Content maxWidth="600px">
         <Center>
           <Picker
-            style={{height: 50, width: '100%'}}
+            style={styles.languagePicker}
             selectedValue={language}
             onValueChange={value => setLanguage(value)}>
             {supportedLanguages.map(lang => {

@@ -1,11 +1,9 @@
 import AxiosClient from '../../../../src/base/infrastructure/AxiosClient';
 import ServerException from '../../../../src/base/domain/core/exception/ServerException';
-import {AxiosResponse} from 'axios';
-import {mocked} from 'ts-jest/utils';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {mock} from 'jest-mock-extended';
+import { AxiosResponse } from 'axios';
+import { mock } from 'jest-mock-extended';
 import AsyncStorageRepository from '../../../../src/async_storage/domain/repository/AsyncStorageRepository';
-import {when} from 'jest-when';
+import { when } from 'jest-when';
 
 describe('AxiosClient', () => {
   let asyncStorageRepositoryMock: AsyncStorageRepository;

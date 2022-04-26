@@ -5,7 +5,7 @@ import {myContainer} from '../../../../ioc/container';
 import GetPopularMoviesUseCase from '../../../domain/usecase/GetPopularMoviesUseCase';
 import {InjectableTypes} from '../../../../ioc/types';
 import {useInfiniteQuery} from 'react-query';
-import {Alert, FlatList, RefreshControl} from 'react-native';
+import { Alert, FlatList, RefreshControl } from 'react-native';
 import MovieCard from '../../components/MovieCard';
 import {MovieLibraryQueryKey} from '../../../consts/consts';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -67,7 +67,6 @@ export default function PopularMovies({navigation}: Props) {
           refreshControl={
             <RefreshControl refreshing={isFetching} onRefresh={refetch} />
           }
-          contentContainerStyle={{alignSelf: 'center'}}
           numColumns={3}
           onEndReachedThreshold={0.1}
           onEndReached={() => fetchNextPage()}
