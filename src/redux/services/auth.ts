@@ -1,9 +1,6 @@
 import {createApi} from '@reduxjs/toolkit/query/react'
 import {AuthNewSessionResponse, AuthTokenResponse, LoginRequest} from "../../types/api/types";
 import axiosBaseQuery from "./core";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {accountApi} from "./account";
-import {login} from "../slice/session";
 
 export const authApi = createApi({
   reducerPath: 'auth',
@@ -22,26 +19,9 @@ export const authApi = createApi({
               ...login
             }
           }),
-          onQueryStarted: async (body, { dispatch, queryFulfilled, getState }) => {
-            try {
-              const { data } = await queryFulfilled
-              const {data: newSessionResponseData} = await dispatch(authApi.endpoints.createSession.initiate(data.request_token))
-              await AsyncStorage.setItem('session_id', newSessionResponseData?.session_id || '')
-              const { data: accountDetails } = await dispatch(accountApi.endpoints.getDetails.initiate())
-
-              if (accountDetails) {
-                dispatch(login({
-                  username: accountDetails.username
-                }))
-              }
-            } catch (e: any) {
-              alert('error ' + e.toString())
-            }
-
           }
-        }
       ),
-      createSession: build.query<AuthNewSessionResponse, string>(
+      createSession: build.mutation<AuthNewSessionResponse, string>(
         {
           query: (requestToken) => ({
             url: `/authentication/session/new`, method: 'post', data: {
@@ -54,4 +34,4 @@ export const authApi = createApi({
   },
 })
 
-export const {useLoginMutation, useCreateRequestTokenQuery} = authApi
+export const {useLoginMutation, useLazyCreateRequestTokenQuery, useCreateSessionMutation} = authApi

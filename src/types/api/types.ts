@@ -9,6 +9,12 @@ type AuthNewSessionResponse = {
   session_id: string
 }
 
+type AddToFavouritesRequestBody = {
+  accountId: string,
+  movieId: number,
+  type: 'movie' | 'tv'
+}
+
 type AccountDetailsResponse = {
   "id": number,
   "name": string,
@@ -22,4 +28,4 @@ type LoginRequest = {
   request_token: string
 }
 
-export { AuthTokenResponse, LoginRequest, AuthNewSessionResponse, AccountDetailsResponse}
+export { AuthTokenResponse, LoginRequest, AuthNewSessionResponse, AccountDetailsResponse, AddToFavouritesRequestBody}

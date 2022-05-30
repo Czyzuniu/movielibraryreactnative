@@ -1,4 +1,4 @@
-import {Box, Center, Flex, HStack, IImageProps, useTheme} from 'native-base';
+import {Box, HStack, IImageProps, useTheme} from 'native-base';
 import React from 'react';
 import MovieInfoBadge from '../MovieInfoBadge';
 import CoreMapper from '../../../../base/mapper/CoreMapper';

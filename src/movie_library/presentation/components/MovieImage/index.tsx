@@ -1,10 +1,7 @@
 import {IImageProps, Image} from 'native-base';
 import React from 'react';
 import Config from 'react-native-config';
-import {
-  DEFAULT_POSTER_DOWNLOAD_SIZE,
-  NO_POSTER_IMAGE_URL,
-} from '../../../consts/consts';
+import {DEFAULT_POSTER_DOWNLOAD_SIZE, NO_POSTER_IMAGE_URL,} from '../../../consts/consts';
 
 const {API_IMAGE_URL} = Config;
 

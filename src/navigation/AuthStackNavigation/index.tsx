@@ -5,13 +5,27 @@ import styles from '../LoggedInBottomTabNavigation/styles';
 import {useTranslation} from 'react-i18next';
 import Login from "../../movie_library/presentation/screens/Login";
 import LoggedInBottomTabNavigation from "../LoggedInBottomTabNavigation";
-import {useAppSelector} from "../../redux/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 
 export default function AuthStackNavigation() {
   const isSignedIn = useAppSelector(state => state.session.sessionId !== null)
   const {t} = useTranslation('navigation');
   const navigationStyle = styles();
   const Stack = createStackNavigator<HomeStackParamList>();
+  const dispatch = useAppDispatch();
+
+  // if (isSignedIn) {
+  //   trigger().then(({ data }) => {
+  //     if (data) {
+  //       dispatch(setAccountDetails({
+  //         username: data.username
+  //       }))
+  //     }
+  //   })
+  //
+  // }
+
+
   return (
     <Stack.Navigator
       screenOptions={{

@@ -1,6 +1,6 @@
 import AsyncStorageUtils from "./AsyncStorageUtils";
 import {LocalStorageLocaleKey} from "../../i18n/consts";
-import { LocaleSettings } from "../types/locale/types";
+import {LocaleSettings} from "../types/locale/types";
 
 export default class LocaleUtils
 {

@@ -1,11 +1,19 @@
 import React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {HomeStackParamList} from '../../../../navigation/types';
-import {Box, Center, Heading} from "native-base";
+import {Box} from "native-base";
+import {useGetFavouriteMoviesQuery} from "../../../../redux/services/movies";
+import {useAppSelector} from "../../../../redux/hooks/hooks";
+import MovieVerticalCardList from "../../components/MovieVerticalCardList";
+import WaitSpinner from "../../../../base/presentation/components/WaitSpinner";
 
 type Props = StackScreenProps<HomeStackParamList, 'ViewMovieHomePageWebView'>;
 
 export default function Favourites({route}: Props) {
+  const { data = {
+    results: []
+  }, isLoading } = useGetFavouriteMoviesQuery(useAppSelector(state => state.session.user.username))
+
   return (
     <Box
       _dark={{
@@ -13,9 +21,8 @@ export default function Favourites({route}: Props) {
       }}
       flex={1}
     >
-    <Center flex={1}>
-      <Heading>My Favourites</Heading>
-    </Center>
+      <MovieVerticalCardList data={data.results} />
+      <WaitSpinner isVisible={isLoading} />
     </Box>
   )
 }

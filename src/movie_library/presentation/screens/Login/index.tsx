@@ -1,22 +1,48 @@
 import {Box, Button, Center, Heading, Input, Stack, Text, useTheme, View} from "native-base";
-import React from "react";
+import React, {useState} from "react";
 import Logo from "../../../../base/presentation/components/Logo";
 import {ImageBackground} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import {useCreateRequestTokenQuery, useLoginMutation} from "../../../../redux/services/auth";
-import WaitSpinner from "../../../../base/presentation/components/WaitSpinner";
+import {
+  useCreateSessionMutation,
+  useLazyCreateRequestTokenQuery,
+  useLoginMutation
+} from "../../../../redux/services/auth";
 import {StackScreenProps} from "@react-navigation/stack";
 import {HomeStackParamList} from "../../../../navigation/types";
 import {useAppDispatch} from "../../../../redux/hooks/hooks";
 import {authenticate} from "../../../../redux/slice/session";
+import AsyncStorageUtils from "../../../../utils/AsyncStorageUtils";
+import {useLazyGetAccountDetailsQuery} from "../../../../redux/services/account";
 
 type Props = StackScreenProps<HomeStackParamList, 'Login'>;
 
-export default function Login({ navigation }: Props) {
-  const { colors } = useTheme()
-  const { data } = useCreateRequestTokenQuery();
-  const [login, { isLoading}] = useLoginMutation()
+export default function Login({navigation}: Props) {
+  const [loading, setLoading] = useState(false);
+  const {colors} = useTheme()
+  const [createRequestToken] = useLazyCreateRequestTokenQuery();
+  const [createSession] = useCreateSessionMutation();
+  const [getAccountDetails] = useLazyGetAccountDetailsQuery();
+  const [login] = useLoginMutation()
   const dispatch = useAppDispatch();
+
+  const onLoginPress = async () => {
+    setLoading(true)
+    const requestToken = await createRequestToken().unwrap()
+    const loginSession = await login({
+      username: 'Czyzuniu',
+      password: 'jbVT6zN@tGjEYgC',
+      request_token: requestToken.request_token
+    }).unwrap()
+    const session = await createSession(loginSession.request_token).unwrap()
+    await AsyncStorageUtils.persist('session_id', session.session_id)
+    const accountDetails = await getAccountDetails().unwrap()
+    dispatch(authenticate({
+      sessionId: session.session_id,
+      username: accountDetails.username
+    }))
+    setLoading(false)
+  }
 
   return (
     <ImageBackground style={{
@@ -30,7 +56,7 @@ export default function Login({ navigation }: Props) {
       }}>
         <Center>
           <Logo/>
-          <Heading m={5} size={'sm'} color={colors.white} >The Movie DB</Heading>
+          <Heading m={5} size={'sm'} color={colors.white}>The Movie DB</Heading>
           <Stack space={5} w="80%" m={2}>
             <Input
               InputRightElement={
@@ -49,13 +75,13 @@ export default function Login({ navigation }: Props) {
               borderBottomColor={'white'} variant={'underlined'} size={'md'} placeholderTextColor={'white'}
               placeholder="Password..."/>
             <Center>
-              <Button w={'75%'} rounded={'full'} variant={'solid'} colorScheme={'success'} onPress={() => login({
-                username: 'Czyzuniu',
-                password: 'jbVT6zN@tGjEYgC',
-                request_token: data?.request_token || ''
-              }).unwrap().then((a) => {
-                  dispatch(authenticate(a.request_token))
-              })}>
+              <Button
+                isLoading={loading}
+                spinnerPlacement={'end'}
+                w={'75%'} rounded={'full'}
+                variant={'solid'}
+                colorScheme={'success'} onPress={onLoginPress}
+              >
                 <Text textAlign={'center'}>
                   Login
                 </Text>
@@ -69,7 +95,6 @@ export default function Login({ navigation }: Props) {
           </Center>
         </Box>
       </View>
-      <WaitSpinner isVisible={isLoading} />
     </ImageBackground>
   )
 }

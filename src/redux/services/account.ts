@@ -7,13 +7,13 @@ export const accountApi = createApi({
   baseQuery: axiosBaseQuery(),
   endpoints: (build) => {
     return {
-      getDetails: build.query<AccountDetailsResponse, void>(
+      getAccountDetails: build.query<AccountDetailsResponse, void>(
         {
-          query: () => ({url: `/account/`, method: 'get'})
+          query: () => ({url: `/account`, method: 'get'})
         }
-      )
+      ),
     }
   },
 })
 
-export const {useGetDetailsQuery} = accountApi
+export const {useLazyGetAccountDetailsQuery} = accountApi

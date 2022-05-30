@@ -9,6 +9,7 @@ import BottomNavigationIcon from "../../base/presentation/components/BottomNavig
 import Account from "../../movie_library/presentation/screens/Account";
 import Watchlist from "../../movie_library/presentation/screens/Watchlist";
 import Favourites from "../../movie_library/presentation/screens/Favourites";
+import FavouritesStack from "../FavouritesStack";
 
 export default function LoggedInBottomTabNavigation() {
   const {t} = useTranslation('navigation');
@@ -44,7 +45,7 @@ export default function LoggedInBottomTabNavigation() {
           tabBarLabel: t('Favourites'),
         }}
         name="FavouritesStack"
-        component={Favourites}
+        component={FavouritesStack}
       />
       <Tab.Screen
         options={{

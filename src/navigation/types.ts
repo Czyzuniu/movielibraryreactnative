@@ -12,4 +12,10 @@ type HomeStackParamList = {
   ViewMovieHomePageWebView: {movieUrl: string};
 };
 
-export {LoggedInBottomNavigationTabParamList, HomeStackParamList};
+type FavouritesStackParamList = {
+  Favourites: undefined
+  ViewMovie: {movieId: string; title: string};
+  ViewMovieHomePageWebView: {movieUrl: string};
+};
+
+export {LoggedInBottomNavigationTabParamList, HomeStackParamList, FavouritesStackParamList};
