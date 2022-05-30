@@ -12,7 +12,7 @@ export default function MovieOverview({movie}: Props) {
   const {overview} = movie;
 
   return (
-    <Box margin={5}>
+    <Box margin={5} flex={1}>
       <Heading size={'lg'} margin={1}>
         {t('Overview')}
       </Heading>

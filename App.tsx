@@ -1,18 +1,22 @@
 import React from 'react';
 import {NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
-import BottomTabNavigation from './src/navigation/BottomNavigation';
+import LoggedInBottomTabNavigation from './src/navigation/LoggedInBottomTabNavigation';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import AppTheme from './src/base/presentation/theme';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useTranslation} from 'react-i18next';
 import WaitSpinner from './src/base/presentation/components/WaitSpinner';
+import {Provider} from "react-redux";
+import store from "./src/redux/store/store";
+import AuthStackNavigation from "./src/navigation/AuthStackNavigation";
 
 export default function App() {
   const queryClient = new QueryClient();
   const {ready} = useTranslation();
 
   return (
+  <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <NativeBaseProvider theme={AppTheme()}>
         <SafeAreaProvider
@@ -26,11 +30,12 @@ export default function App() {
             <WaitSpinner isVisible={true} />
           ) : (
             <NavigationContainer>
-              <BottomTabNavigation />
+              <AuthStackNavigation />
             </NavigationContainer>
           )}
         </SafeAreaProvider>
       </NativeBaseProvider>
     </QueryClientProvider>
+  </Provider>
   );
 }

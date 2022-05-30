@@ -1,4 +1,4 @@
-import {Box, Flex, IImageProps, useTheme} from 'native-base';
+import {Box, Center, Flex, HStack, IImageProps, useTheme} from 'native-base';
 import React from 'react';
 import MovieInfoBadge from '../MovieInfoBadge';
 import CoreMapper from '../../../../base/mapper/CoreMapper';
@@ -16,26 +16,26 @@ export default function MovieBadgesRow({movie}: Props) {
   const {t} = useTranslation('viewMovie');
 
   return (
-    <Box height={'90px'} margin={1.5}>
-      <Flex direction={'row'}>
-        <MovieInfoBadge
-          mainText={CoreMapper.numberToString(movie.averageVote)}
-          secondaryText={t('TotalVotes', {
-            total: CoreMapper.numberToString(movie.totalVotes),
-          })}
-          icon={<Icon name={'star'} color={colors.amber['600']} />}
-        />
-        <MovieInfoBadge
-          mainText={t('RuntimeMin', {minutes: movie.runTime})}
-          secondaryText={t('Runtime')}
-          icon={<Icon name={'clock-o'} color={colors.amber['600']} />}
-        />
-        <MovieInfoBadge
-          mainText={dayjs(movie.releaseDate).format('MMM, D YYYY')}
-          secondaryText={t('ReleaseDate')}
-          icon={<Icon name={'calendar'} color={colors.amber['600']} />}
-        />
-      </Flex>
+    <Box m={1.5}>
+    <HStack margin={1.5} space={5} flexDirection={'row'}>
+      <MovieInfoBadge
+        mainText={CoreMapper.numberToString(movie.averageVote)}
+        secondaryText={t('TotalVotes', {
+          total: CoreMapper.numberToString(movie.totalVotes),
+        })}
+        icon={<Icon name={'star'} color={colors.amber['600']}/>}
+      />
+      <MovieInfoBadge
+        mainText={t('RuntimeMin', {minutes: movie.runTime})}
+        secondaryText={t('Runtime')}
+        icon={<Icon name={'clock-o'} color={colors.amber['600']}/>}
+      />
+      <MovieInfoBadge
+        mainText={dayjs(movie.releaseDate).format('MMM, D YYYY')}
+        secondaryText={t('ReleaseDate')}
+        icon={<Icon name={'calendar'} color={colors.amber['600']}/>}
+      />
+    </HStack>
     </Box>
   );
 }

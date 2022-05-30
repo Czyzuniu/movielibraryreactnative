@@ -9,8 +9,8 @@ type Props = {
 
 export default function MovieInfoBadge({icon, mainText, secondaryText}: Props) {
   return (
-    <Center>
-      <Box flexDirection={'row'} alignItems={'center'}>
+    <Center flex={1}>
+      <Box flexDirection={'row'} alignItems={'center'} flex={1}>
         <Text margin={1}>{mainText}</Text>
         {icon}
       </Box>

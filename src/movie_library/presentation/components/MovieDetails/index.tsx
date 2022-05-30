@@ -1,4 +1,4 @@
-import {Box} from 'native-base';
+import {Box, Center} from 'native-base';
 import React from 'react';
 import MovieBackdropImage from '../MovieBackdropImage';
 import DescriptiveMovie from '../../../domain/entity/DescriptiveMovie';
@@ -14,7 +14,7 @@ export default function MovieDetails({movie}: Props) {
   const {backdrop} = movie;
 
   return (
-    <Box testID={`MOVIE_DETAILS_${movie.id}`}>
+    <Box testID={`MOVIE_DETAILS_${movie.id}`} flex={1}>
       <MovieDetailsHeader movie={movie} />
       <MovieBadgesRow movie={movie} />
       <MovieOverview movie={movie} />

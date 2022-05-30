@@ -1,4 +1,4 @@
-import {Box, Button, Center, Flex, Heading, Text} from 'native-base';
+import {Box, Button, Center, Flex, Heading, HStack, Text, VStack} from 'native-base';
 import MoviePosterImage from '../MoviePosterImage';
 import React from 'react';
 import DescriptiveMovie from '../../../domain/entity/DescriptiveMovie';
@@ -19,11 +19,11 @@ export default function MovieDetailsHeader({movie}: Props) {
   const {poster, title, genres, homepageUrl} = movie;
 
   return (
-    <Flex direction={'row'} m={2}>
-      <Center>
+    <HStack m={2}>
+      <Center flex={0.5}>
         <MoviePosterImage imagePath={poster} />
       </Center>
-      <Box shadow={1}>
+      <VStack flex={0.5} justifyContent={'space-around'}>
         <Center>
           <Heading textAlign={'center'} size={'md'}>
             {title}
@@ -45,7 +45,7 @@ export default function MovieDetailsHeader({movie}: Props) {
           }>
           {t('MovieGoWebsite')}
         </Button>
-      </Box>
-    </Flex>
+      </VStack>
+    </HStack>
   );
 }

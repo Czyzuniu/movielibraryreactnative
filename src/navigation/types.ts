@@ -1,12 +1,15 @@
-type RootBottomNavigationParamList = {
-  HomeRootStack: undefined;
-  FavouritesRootStack: undefined;
+type LoggedInBottomNavigationTabParamList = {
+  HomeStack: undefined;
+  FavouritesStack: undefined;
+  WatchlistStack: undefined;
+  AccountStack: undefined;
 };
 
 type HomeStackParamList = {
+  Login: undefined
   Home: undefined;
   ViewMovie: {movieId: string; title: string};
   ViewMovieHomePageWebView: {movieUrl: string};
 };
 
-export {RootBottomNavigationParamList, HomeStackParamList};
+export {LoggedInBottomNavigationTabParamList, HomeStackParamList};

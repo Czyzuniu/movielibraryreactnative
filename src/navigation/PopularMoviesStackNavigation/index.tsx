@@ -3,7 +3,7 @@ import PopularMovies from '../../movie_library/presentation/screens/PopularMovie
 import ViewMovie from '../../movie_library/presentation/screens/ViewMovie';
 import {HomeStackParamList} from '../types';
 import React from 'react';
-import styles from '../BottomNavigation/styles';
+import styles from '../LoggedInBottomTabNavigation/styles';
 import {useTranslation} from 'react-i18next';
 import ViewMovieHomePageUrl from '../../movie_library/presentation/screens/ViewMovieHomePageUrl';
 
