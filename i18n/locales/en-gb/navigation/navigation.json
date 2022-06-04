@@ -1,4 +1,10 @@
 {
-  "homeTabHeaderTitle": "Home",
-  "homeTabLabelTitle": "Movies"
+  "ExploreTabHeaderTitle": "Explore",
+  "ExploreTabLabelTitle": "Explore",
+  "MyListsTabHeaderTitle": "My Lists",
+  "MyListsTabLabelTitle": "My Lists",
+  "WatchlistTabLabelTitle": "Watchlist",
+  "WatchlistTabHeaderTitle": "Watchlist",
+  "SettingsTabHeaderTitle": "Settings",
+  "SettingsTabLabelTitle": "Settings"
 }

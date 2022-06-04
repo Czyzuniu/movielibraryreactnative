@@ -9,13 +9,14 @@ import {
   useLoginMutation
 } from "../../../../redux/services/auth";
 import {StackScreenProps} from "@react-navigation/stack";
-import {HomeStackParamList} from "../../../../navigation/types";
 import {useAppDispatch} from "../../../../redux/hooks/hooks";
 import {authenticate} from "../../../../redux/slice/session";
 import AsyncStorageUtils from "../../../../utils/AsyncStorageUtils";
 import {useLazyGetAccountDetailsQuery} from "../../../../redux/services/account";
+import {useTranslation} from "react-i18next";
+import {LoginStackParamList} from "../../../../navigation/types";
 
-type Props = StackScreenProps<HomeStackParamList, 'Login'>;
+type Props = StackScreenProps<LoginStackParamList, 'Login'>;
 
 export default function Login({navigation}: Props) {
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,8 @@ export default function Login({navigation}: Props) {
   const [getAccountDetails] = useLazyGetAccountDetailsQuery();
   const [login] = useLoginMutation()
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('login');
+
 
   const onLoginPress = async () => {
     setLoading(true)
@@ -66,14 +69,14 @@ export default function Login({navigation}: Props) {
               variant={'underlined'}
               size={'md'}
               placeholderTextColor={'white'}
-              placeholder="Username..."/>
+              placeholder={t('UsernamePlaceholder')}/>
             <Input
               InputRightElement={
                 <Icon name={'lock'} size={25} color={'white'}/>
               }
               type={'password'}
               borderBottomColor={'white'} variant={'underlined'} size={'md'} placeholderTextColor={'white'}
-              placeholder="Password..."/>
+              placeholder={t('PasswordPlaceholder')}/>
             <Center>
               <Button
                 isLoading={loading}
@@ -83,7 +86,7 @@ export default function Login({navigation}: Props) {
                 colorScheme={'success'} onPress={onLoginPress}
               >
                 <Text textAlign={'center'}>
-                  Login
+                  {t('Login')}
                 </Text>
               </Button>
             </Center>
@@ -91,7 +94,7 @@ export default function Login({navigation}: Props) {
         </Center>
         <Box flex={0.2}>
           <Center>
-            <Heading size={"xs"} color={colors.white}> Do not have an account? Sign up here!</Heading>
+            <Heading size={"xs"} color={colors.white}>{t('DoNotHaveAccount')}</Heading>
           </Center>
         </Box>
       </View>

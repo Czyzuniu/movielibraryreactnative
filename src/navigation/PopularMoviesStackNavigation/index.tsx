@@ -1,16 +1,16 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import PopularMovies from '../../movie_library/presentation/screens/PopularMovies';
-import ViewMovie from '../../movie_library/presentation/screens/ViewMovie';
-import {HomeStackParamList} from '../types';
+import {PopularMoviesStackParamList} from '../types';
 import React from 'react';
 import styles from '../LoggedInBottomTabNavigation/styles';
 import {useTranslation} from 'react-i18next';
-import ViewMovieHomePageUrl from '../../movie_library/presentation/screens/ViewMovieHomePageUrl';
+import CommonNavigator from "../CommonNavigator";
 
-export default function HomeStackNavigation() {
+export default function PopularMoviesStack() {
   const {t} = useTranslation('navigation');
   const navigationStyle = styles();
-  const Stack = createStackNavigator<HomeStackParamList>();
+
+  const Stack = createStackNavigator<PopularMoviesStackParamList>();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -19,24 +19,13 @@ export default function HomeStackNavigation() {
         headerTintColor: navigationStyle.headerTitleStyle.color,
       }}>
       <Stack.Screen
-        name="Home"
+        name="PopularMovies"
         component={PopularMovies}
         options={{
-          headerTitle: t('homeTabHeaderTitle'),
+          headerTitle: t('ExploreTabHeaderTitle'),
         }}
       />
-      <Stack.Screen
-        name="ViewMovie"
-        component={ViewMovie}
-        options={({route}) => ({title: route.params.title})}
-      />
-      <Stack.Screen
-        name="ViewMovieHomePageWebView"
-        options={{
-          headerTitle: '',
-        }}
-        component={ViewMovieHomePageUrl}
-      />
+      <Stack.Screen name={'Common'} options={{headerShown:false}}  component={CommonNavigator}/>
     </Stack.Navigator>
   );
 }

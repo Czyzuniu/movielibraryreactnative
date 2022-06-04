@@ -1,16 +1,14 @@
 import {createApi} from '@reduxjs/toolkit/query/react'
-import {MoviesDto} from "../../movie_library/infrastructure/models/MoviesDto";
 import axiosBaseQuery from "./core";
-import MovieDto from "../../movie_library/infrastructure/models/MovieDto";
-import {AddToFavouritesRequestBody} from "../../types/api/types";
+import {CreateListRequestBody, MovieResponse, MoviesResponse, MovieStateResponse} from "../../types/api/types";
 
 export const moviesApi = createApi({
   reducerPath: 'moviesApi',
   baseQuery: axiosBaseQuery(),
-  tagTypes: ['PopularMovies', 'Favourites'],
+  tagTypes: ['PopularMovies', 'Favourites', 'MovieState'],
   endpoints: (build) => {
     return {
-      getPopularMovies: build.query<MoviesDto, number>(
+      getPopularMovies: build.query<MoviesResponse, number>(
         {
           query: (page = 1) => ({url: `/movie/popular?page=${page}`, method: 'get'}),
           providesTags: [
@@ -18,37 +16,54 @@ export const moviesApi = createApi({
           ],
         }
       ),
-      getMovieById: build.query<MovieDto, string>(
+      getMovieById: build.query<MovieResponse, string>(
         {
           query: (movieId) => ({url: `/movie/${movieId}`, method: 'get'})
         }
       ),
-      getFavouriteMovies: build.query<MoviesDto, string>(
+      getFavouriteMovies: build.query<MoviesResponse, {
+        accountId: string,
+        page: number
+      }>(
         {
-          query: (accountId: string) => {
-            return {url: `/account/${accountId}/favorite/movies`, method: 'get'}
+          query: ({ accountId, page}) => {
+            return {url: `/account/${accountId}/favorite/movies`, method: 'get', params: {
+              page
+            }}
           },
           providesTags: [
             'Favourites',
           ],
         }
       ),
-      addToFavourites: build.mutation<MoviesDto, AddToFavouritesRequestBody>(
+      toggleFavourite: build.mutation<void, CreateListRequestBody>(
         {
-          query: ({accountId, movieId, type}) => {
+          query: ({accountId, movieId, type, isFavourite}) => {
             return {
               url: `/account/${accountId}/favorite`, method: 'post', data: {
-                favorite: true,
+                favorite: isFavourite,
                 media_id: movieId,
                 media_type: type
-              }
+              },
             }
           },
-          invalidatesTags: ['Favourites']
+          invalidatesTags: ['Favourites', 'MovieState']
+        }
+      ),
+      getMovieState: build.query<MovieStateResponse, string>(
+        {
+          query: (movieId) => {
+            return {
+              url: `/movie/${movieId}/account_states`, method: 'get'
+            }
+          },
+          providesTags: [
+            'MovieState'
+          ]
         }
       ),
     }
   },
 })
 
-export const {useGetPopularMoviesQuery, useGetMovieByIdQuery, useAddToFavouritesMutation, useGetFavouriteMoviesQuery} = moviesApi
+export const {useGetPopularMoviesQuery, useGetMovieByIdQuery, useToggleFavouriteMutation, useGetFavouriteMoviesQuery, useGetMovieStateQuery, useLazyGetFavouriteMoviesQuery} = moviesApi

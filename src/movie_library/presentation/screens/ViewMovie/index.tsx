@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {ScrollView} from 'native-base';
 import {StackScreenProps} from '@react-navigation/stack';
-import {HomeStackParamList} from '../../../../navigation/types';
+import {LoggedInStackParamList} from '../../../../navigation/types';
 import MovieDetails from '../../components/MovieDetails';
 import {RefreshControl} from 'react-native';
 import {useGetMovieByIdQuery} from "../../../../redux/services/movies";
 import WaitSpinner from "../../../../base/presentation/components/WaitSpinner";
 import MovieDtoToDescriptiveMovieMapper from "../../../infrastructure/mappers/MovieDtoToDescriptiveMovieMapper";
 
-type Props = StackScreenProps<HomeStackParamList, 'ViewMovie'>;
+type Props = StackScreenProps<LoggedInStackParamList, 'ViewMovie'>;
 
 export default function ViewMovie({navigation, route}: Props) {
   const {movieId} = route.params;

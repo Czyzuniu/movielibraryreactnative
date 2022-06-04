@@ -1,15 +1,16 @@
 import {useTranslation} from "react-i18next";
 import styles from "../LoggedInBottomTabNavigation/styles";
 import {createStackNavigator} from "@react-navigation/stack";
-import {FavouritesStackParamList} from "../types";
-import ViewMovie from "../../movie_library/presentation/screens/ViewMovie";
+import {CreatedListsStackStackParamList} from "../types";
 import React from "react";
-import Favourites from "../../movie_library/presentation/screens/Favourites";
+import MyLists from "../../movie_library/presentation/screens/MyLists";
+import CommonNavigator from "../CommonNavigator";
+import CreateList from "../../movie_library/presentation/screens/CreateList";
 
-export default function FavouritesStack() {
+export default function MyListsStackNavigation() {
   const {t} = useTranslation('navigation');
   const navigationStyle = styles();
-  const Stack = createStackNavigator<FavouritesStackParamList>();
+  const Stack = createStackNavigator<CreatedListsStackStackParamList>();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,16 +19,18 @@ export default function FavouritesStack() {
         headerTintColor: navigationStyle.headerTitleStyle.color,
       }}>
       <Stack.Screen
-        name="Favourites"
-        component={Favourites}
+        name="MyLists"
+        component={MyLists}
         options={{
-          headerTitle: t('homeTabHeaderTitle'),
+          headerTitle: t('MyListsTabHeaderTitle'),
         }}
       />
       <Stack.Screen
-        name="ViewMovie"
-        component={ViewMovie}
-        options={({route}) => ({title: route.params.title})}
+        name="CreateList"
+        component={CreateList}
+        options={{
+          headerTitle: t('MyListsTabHeaderTitle'),
+        }}
       />
     </Stack.Navigator>
   );

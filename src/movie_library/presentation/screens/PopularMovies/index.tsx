@@ -1,37 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
-import {Box, Button, Center} from 'native-base';
+import {Box, Center} from 'native-base';
 import {StackScreenProps} from '@react-navigation/stack';
-import {HomeStackParamList} from '../../../../navigation/types';
 import SearchBar from '../../../../base/presentation/components/SearchBar';
-import LanguageModal from '../../../../base/presentation/components/LanguageModal';
 import {useGetPopularMoviesQuery} from "../../../../redux/services/movies";
-import MovieDto from "../../../infrastructure/models/MovieDto";
 import MovieVerticalCardList from "../../components/MovieVerticalCardList";
-import Icon from "react-native-vector-icons/FontAwesome";
+import {PopularMoviesStackParamList} from "../../../../navigation/types";
 
-type Props = StackScreenProps<HomeStackParamList, 'Home'>;
+type Props = StackScreenProps<PopularMoviesStackParamList, 'PopularMovies'>;
 
 export default function PopularMovies({navigation}: Props) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const {
     data = {
-      results: []
+      results: [],
+      page: 1,
+      total_pages: 0,
+      total_results: 0
     }, isFetching
   } = useGetPopularMoviesQuery(page)
-  const [items, setItems] = useState<Array<MovieDto>>(data?.results || []);
-
-  useEffect(() => {
-    if (data.results.length) {
-      const hasDuplicate = items.find(movie => movie.id === data.results[0].id);
-      if (hasDuplicate) {
-        setItems(data.results)
-      } else {
-        setItems(items.concat(data.results))
-      }
-    }
-  }, [data])
 
   return (
     <Box
@@ -47,26 +35,8 @@ export default function PopularMovies({navigation}: Props) {
         <SearchBar onSearch={setSearch}/>
       </Center>
       <Box flex={0.9}>
-        <MovieVerticalCardList data={items} ListFooterComponent={() => {
-          if (items.length) {
-            return (
-              <Center flex={0.2} m={5}>
-                <Button
-                  variant={'solid'}
-                  isLoading={isFetching}
-                  spinnerPlacement="end"
-                  onPress={() => {
-                    setPage(page + 1)
-                  }}
-                  leftIcon={<Icon name={'chevron-circle-down'} color={'white'}/>} w={250}>Load more...
-                </Button>
-              </Center>
-            )
-          }
-          return null
-        }}/>
+        <MovieVerticalCardList data={data} page={page} onLoadMore={() => setPage(page + 1)} isFetching={isFetching} />
       </Box>
-      <LanguageModal/>
     </Box>
   );
 }

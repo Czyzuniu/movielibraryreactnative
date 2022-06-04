@@ -1,9 +1,9 @@
 import React from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
-import {HomeStackParamList} from '../../../../navigation/types';
+import {LoggedInStackParamList} from '../../../../navigation/types';
 import {Box, Center, Heading} from "native-base";
 
-type Props = StackScreenProps<HomeStackParamList, 'ViewMovieHomePageWebView'>;
+type Props = StackScreenProps<LoggedInStackParamList, 'ViewMovieHomePageWebView'>;
 
 export default function Watchlist({route}: Props) {
   return (

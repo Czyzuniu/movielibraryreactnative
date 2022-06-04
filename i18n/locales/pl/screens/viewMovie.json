@@ -4,6 +4,9 @@
   "RuntimeMin": "{{minutes}} minut",
   "TotalVotes": "{{total}} glosów",
   "AddToFavourites": "Dodaj do ulubionych",
+  "RemoveFromFavourites": "Usun z ulubionych",
+  "RemovedFromFavourites": "Usunieto z ulubionych",
+  "AddedToFavourites": "Dodano do twoich ulubionych",
   "MovieGoWebsite": "Strona internetowa",
   "Overview": "Przegląd"
 }

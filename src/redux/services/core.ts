@@ -18,8 +18,7 @@ const onRequestFulfilled = async (config: AxiosRequestConfig) => {
   return config;
 };
 
-const axiosBaseQuery = (
-  ): BaseQueryFn<{
+const axiosBaseQuery = (baseURL = API_URL): BaseQueryFn<{
     url: string
     method: AxiosRequestConfig['method']
     data?: AxiosRequestConfig['data']

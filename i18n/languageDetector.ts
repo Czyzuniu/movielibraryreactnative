@@ -22,12 +22,12 @@ export const LANGUAGE_DETECTOR = (langCodes: Array<string>) => {
             callback(language.language);
             return;
           }
-          return 'en';
+          return 'en-GB';
         })
         .catch(() => {
           const findBestAvailableLanguage =
             RNLocalize.findBestAvailableLanguage(langCodes) || {
-              languageTag: 'en',
+              languageTag: 'en-GB',
             };
           callback(findBestAvailableLanguage.languageTag);
         });

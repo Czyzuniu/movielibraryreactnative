@@ -2,7 +2,7 @@ import {Center, Heading, HStack, Text, VStack} from 'native-base';
 import MoviePosterImage from '../MoviePosterImage';
 import React from 'react';
 import DescriptiveMovie from '../../../domain/entity/DescriptiveMovie';
-import AddToFavouritesButton from "../AddToFavouritesButton";
+import ToggleAsFavouriteButton from "../AddToFavouritesButton";
 
 type Props = {
   movie: DescriptiveMovie;
@@ -26,7 +26,7 @@ export default function MovieDetailsHeader({movie: { poster, title, genres, id }
             return <Text key={q.id}>{q.name}</Text>;
           })}
         </Center>
-        <AddToFavouritesButton movieId={parseInt(id)} type={type} />
+        <ToggleAsFavouriteButton movieId={parseInt(id)} type={type} />
       </VStack>
     </HStack>
   );

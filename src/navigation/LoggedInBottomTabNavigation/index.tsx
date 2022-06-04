@@ -3,13 +3,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTranslation} from 'react-i18next';
 import styles from './styles';
 import {LoggedInBottomNavigationTabParamList} from '../types';
-import HomeStackNavigation from '../PopularMoviesStackNavigation';
+import PopularMoviesStack from '../PopularMoviesStackNavigation';
 import {useTheme} from 'native-base';
 import BottomNavigationIcon from "../../base/presentation/components/BottomNavigationIcon";
-import Account from "../../movie_library/presentation/screens/Account";
-import Watchlist from "../../movie_library/presentation/screens/Watchlist";
-import Favourites from "../../movie_library/presentation/screens/Favourites";
-import FavouritesStack from "../FavouritesStack";
+import Settings from "../../movie_library/presentation/screens/Settings";
+import MyListsStack from "../MyListsStackNavigation";
 
 export default function LoggedInBottomTabNavigation() {
   const {t} = useTranslation('navigation');
@@ -30,42 +28,32 @@ export default function LoggedInBottomTabNavigation() {
       <Tab.Screen
         options={{
           tabBarIcon: ({color}) => (
-            <BottomNavigationIcon name={'film'} color={color}/>
+            <BottomNavigationIcon name={'globe'} color={color}/>
           ),
-          tabBarLabel: t('homeTabLabelTitle'),
+          tabBarLabel: t('ExploreTabLabelTitle'),
         }}
-        name="HomeStack"
-        component={HomeStackNavigation}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({color}) => (
-            <BottomNavigationIcon name={'heart'} color={color}/>
-          ),
-          tabBarLabel: t('Favourites'),
-        }}
-        name="FavouritesStack"
-        component={FavouritesStack}
+        name="PopularMoviesStack"
+        component={PopularMoviesStack}
       />
       <Tab.Screen
         options={{
           tabBarIcon: ({color}) => (
             <BottomNavigationIcon name={'list'} color={color}/>
           ),
-          tabBarLabel: t('Watchlist'),
+          tabBarLabel: t('MyListsTabLabelTitle'),
         }}
-        name="WatchlistStack"
-        component={Watchlist}
+        name="CreatedListsStack"
+        component={MyListsStack}
       />
       <Tab.Screen
         options={{
           tabBarIcon: ({color}) => (
-            <BottomNavigationIcon name={'user'} color={color}/>
+            <BottomNavigationIcon name={'cog'} color={color}/>
           ),
-          tabBarLabel: t('Account'),
+          tabBarLabel: t('SettingsTabLabelTitle'),
         }}
-        name="AccountStack"
-        component={Account}
+        name="SettingsStack"
+        component={Settings}
       />
     </Tab.Navigator>
   );

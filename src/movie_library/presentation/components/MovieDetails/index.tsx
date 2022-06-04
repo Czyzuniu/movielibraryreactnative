@@ -7,8 +7,6 @@ import MovieBadgesRow from '../MovieBadgesRow';
 import MovieOverview from '../MovieOverview';
 import {useNavigation} from "@react-navigation/native";
 import {useTranslation} from "react-i18next";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {HomeStackParamList} from "../../../../navigation/types";
 
 type Props = {
   movie: DescriptiveMovie;
@@ -16,9 +14,8 @@ type Props = {
 
 export default function MovieDetails({movie}: Props) {
   const {backdrop, homepageUrl} = movie;
-  const navigation =
-    useNavigation<StackNavigationProp<HomeStackParamList, 'ViewMovie'>>();
-  const { t } = useTranslation()
+  const navigation = useNavigation<any>();
+  const { t } = useTranslation('viewMovie')
 
   return (
     <Box testID={`MOVIE_DETAILS_${movie.id}`} flex={1}>
