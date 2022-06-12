@@ -5,11 +5,6 @@ export default function AppTheme() {
   const colorScheme = Appearance.getColorScheme();
   return extendTheme({
     components: {
-      Box: {
-        defaultProps: {
-          flex: 1,
-        },
-      },
       ScrollView: {
         baseStyle: () => {
           return {
@@ -23,6 +18,19 @@ export default function AppTheme() {
           contentContainerStyle: {
             flexGrow: 1,
           },
+        },
+      },
+      View: {
+        baseStyle: () => {
+          return {
+            background: themeTools.mode(
+              'white.300',
+              'muted.800',
+            )({colorMode: colorScheme}),
+          };
+        },
+        defaultProps: {
+          flex: 1
         },
       },
     },

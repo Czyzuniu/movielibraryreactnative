@@ -1,4 +1,10 @@
 {
-  "homeTabHeaderTitle": "Filmy",
-  "homeTabLabelTitle": "Filmy"
+  "ExploreTabHeaderTitle": "Exploruj",
+  "ExploreTabLabelTitle": "Exploruj",
+  "FavouritesTabHeaderTitle": "Ulubione",
+  "FavouritesTabLabelTitle": "Ulubione",
+  "WatchlistTabLabelTitle": "Do obejrzenia",
+  "WatchlistTabHeaderTitle": "Do obejrzenia",
+  "SettingsTabHeaderTitle": "Ustawienia",
+  "SettingsTabLabelTitle": "Ustawienia"
 }

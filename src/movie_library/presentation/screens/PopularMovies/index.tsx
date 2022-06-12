@@ -1,54 +1,25 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
-import {Box, Center, Spinner} from 'native-base';
-import {myContainer} from '../../../../ioc/container';
-import GetPopularMoviesUseCase from '../../../domain/usecase/GetPopularMoviesUseCase';
-import {InjectableTypes} from '../../../../ioc/types';
-import {useInfiniteQuery} from 'react-query';
-import { Alert, FlatList, RefreshControl } from 'react-native';
-import MovieCard from '../../components/MovieCard';
-import {MovieLibraryQueryKey} from '../../../consts/consts';
+import {Box, Center} from 'native-base';
 import {StackScreenProps} from '@react-navigation/stack';
-import {HomeStackParamList} from '../../../../navigation/types';
-import SimplisticMovie from '../../../domain/entity/SimplisticMovie';
 import SearchBar from '../../../../base/presentation/components/SearchBar';
-import LanguageModal from '../../../../base/presentation/components/LanguageModal';
+import {useGetPopularMoviesQuery} from "../../../../redux/services/movies";
+import MovieVerticalCardList from "../../components/MovieVerticalCardList";
+import {PopularMoviesStackParamList} from "../../../../navigation/types";
 
-type Props = StackScreenProps<HomeStackParamList, 'Home'>;
+type Props = StackScreenProps<PopularMoviesStackParamList, 'PopularMovies'>;
 
 export default function PopularMovies({navigation}: Props) {
-  const getPopularMovieUseCase = myContainer.get<GetPopularMoviesUseCase>(
-    InjectableTypes.GetPopularMoviesUseCase,
-  );
-
   const [search, setSearch] = useState('');
-
-  const getPopularMovies = async ({pageParam = 1}) => {
-    return getPopularMovieUseCase.execute(pageParam, search);
-  };
-
-  const {data, refetch, fetchNextPage, isFetching} = useInfiniteQuery(
-    MovieLibraryQueryKey.GetPopularMovies,
-    getPopularMovies,
-    {
-      onError: (e: any) => Alert.alert(e.message),
-      retry: 0,
-      getNextPageParam: (_, pages) => {
-        return pages.length + 1;
-      },
-    },
-  );
-
-  const navigateToViewMovie = useCallback(
-    (movie: SimplisticMovie) => {
-      navigation.navigate('ViewMovie', {movieId: movie.id, title: movie.title});
-    },
-    [navigation],
-  );
-
-  useEffect(() => {
-    refetch();
-  }, [refetch, search]);
+  const [page, setPage] = useState(1);
+  const {
+    data = {
+      results: [],
+      page: 1,
+      total_pages: 0,
+      total_results: 0
+    }, isFetching
+  } = useGetPopularMoviesQuery(page)
 
   return (
     <Box
@@ -57,32 +28,15 @@ export default function PopularMovies({navigation}: Props) {
       }}
       _dark={{
         backgroundColor: 'muted.800',
-      }}>
+      }}
+      flex={1}
+    >
       <Center flex={0.1} m={1.5}>
-        <SearchBar onSearch={setSearch} />
+        <SearchBar onSearch={setSearch}/>
       </Center>
       <Box flex={0.9}>
-        <FlatList
-          testID={'POPULAR_MOVIES_FLAT_LIST'}
-          refreshControl={
-            <RefreshControl refreshing={isFetching} onRefresh={refetch} />
-          }
-          numColumns={3}
-          onEndReachedThreshold={0.1}
-          onEndReached={() => fetchNextPage()}
-          data={data?.pages.flat() || []}
-          renderItem={({item}) => (
-            <MovieCard movie={item} onPress={() => navigateToViewMovie(item)} />
-          )}
-          keyExtractor={item => item.id}
-          ListFooterComponent={() =>
-            isFetching && data ? (
-              <Spinner size={'lg'} color={'secondary.100'} />
-            ) : null
-          }
-        />
+        <MovieVerticalCardList data={data} page={page} onLoadMore={() => setPage(page + 1)} isFetching={isFetching} />
       </Box>
-      <LanguageModal />
     </Box>
   );
 }
