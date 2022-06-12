@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Logo from "../../../../base/presentation/components/Logo";
 import {ImageBackground} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Config from 'react-native-config';
 import {
   useCreateSessionMutation,
   useLazyCreateRequestTokenQuery,
@@ -30,11 +31,12 @@ export default function Login({navigation}: Props) {
 
 
   const onLoginPress = async () => {
+    const { USERNAME, PASSWORD } = Config
     setLoading(true)
     const requestToken = await createRequestToken().unwrap()
     const loginSession = await login({
-      username: 'Czyzuniu',
-      password: 'jbVT6zN@tGjEYgC',
+      username: USERNAME,
+      password: PASSWORD,
       request_token: requestToken.request_token
     }).unwrap()
     const session = await createSession(loginSession.request_token).unwrap()
